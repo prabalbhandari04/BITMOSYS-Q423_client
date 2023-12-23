@@ -1,0 +1,48 @@
+.custom-card {
+    background: rgba(18, 2, 48, 0.31);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(12.8px);
+    -webkit-backdrop-filter: blur(12.8px);
+    display: flex;
+    flex-direction: column;
+    gap: 4;
+    padding: 3;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .custom-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .card-image {
+    height: 100%;
+    width: 100%;
+    border-radius: 16px;
+  }
+  
+  .card-title {
+    font-family: 'font-primary';
+    color: #2c3e50;
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+  
+  .card-username {
+    color: #2c3e50;
+  }
+  
+  .card-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .swap-button {
+    background: rgba(18, 2, 48, 0.31);
+    padding: 2px;
+    border-radius: 50%;
+  }
+  

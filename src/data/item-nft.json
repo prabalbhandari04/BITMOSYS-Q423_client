@@ -1,0 +1,73 @@
+[
+  {
+    "id": 1,
+    "image": "https://cryptologos.cc/logos/bitcoin-btc-logo.svg?v=029",
+    "title": "Bitcoin",
+    "username": "BTC",
+    "price": 3
+  },
+  {
+    "id": 2,
+    "image": "https://cryptologos.cc/logos/dogecoin-doge-logo.svg?v=029",
+    "title": "DogeCoin",
+    "username": "DOGE",
+    "price": 2.34
+  },
+  {
+    "id": 3,
+    "image": "https://cryptologos.cc/logos/cardano-ada-logo.svg?v=029",
+    "title": "Cardano",
+    "username": "ADA",
+    "price": 10.5
+  },
+  {
+    "id": 4,
+    "image": "https://cryptologos.cc/logos/ethereum-eth-logo.svg?v=029",
+    "title": "ETHEREUM",
+    "username": "ETH",
+    "price": 20.5
+  },
+  {
+    "id": 5,
+    "image": "https://cryptologos.cc/logos/dogecoin-doge-logo.svg?v=029",
+    "title": "DogeCoin",
+    "username": "animola",
+    "price": 7
+  },
+  {
+    "id": 6,
+    "image": "https://cryptologos.cc/logos/dogecoin-doge-logo.svg?v=029",
+    "title": "DogeCoin",
+    "username": "kunai",
+    "price": 80
+  },
+  {
+    "id": 7,
+    "image": "https://cryptologos.cc/logos/dogecoin-doge-logo.svg?v=029",
+    "title": "DogeCoin",
+    "username": "kunai",
+    "price": 80
+  },
+  {
+    "id": 8,
+    "image": "https://cryptologos.cc/logos/dogecoin-doge-logo.svg?v=029",
+    "title": "DogeCoin",
+    "username": "kunai",
+    "price": 80
+  },
+  {
+    "id": 9,
+    "image": "https://cryptologos.cc/logos/dogecoin-doge-logo.svg?v=029",
+    "title": "DogeCoin",
+    "username": "kunai",
+    "price": 80
+  },
+  {
+    "id": 10,
+    "image": "https://cryptologos.cc/logos/dogecoin-doge-logo.svg?v=029",
+    "title": "DogeCoin",
+    "username": "kunai",
+    "price": 80
+  }
+
+]

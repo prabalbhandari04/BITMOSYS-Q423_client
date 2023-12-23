@@ -1,0 +1,45 @@
+button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: #120230;
+    border-style: solid;
+    border-width: 2px 2px 2px 2px;
+    border-color: rgba(255, 255, 255, 0.333);
+    border-radius: 40px 40px 40px 40px;
+    padding: 10px;
+    transform: translate(0px, 0px) rotate(0deg);
+    transition: 0.2s;
+    position: relative;
+}
+
+button:hover {
+    
+    color: #442e75;
+}
+
+
+
+@keyframes lightningCrackle {
+    0% {
+        filter: hue-rotate(0deg);
+    }
+    25% {
+        filter: hue-rotate(20deg);
+    }
+    50% {
+        filter: hue-rotate(0deg);
+    }
+    75% {
+        filter: hue-rotate(10deg);
+    }
+    100% {
+        filter: hue-rotate(0deg);
+    }
+}

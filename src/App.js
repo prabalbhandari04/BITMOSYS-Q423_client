@@ -1,53 +1,26 @@
-import React, { useState } from "react";
-import "./App.css";
-import { v4 as uuidv4 } from "uuid";
-import Card from "./components/Cards";
-import Carousel from "./components/Carousel";
+// App.js
+import React, { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import Navbar from "./Components/Navbar";
+import Collections from "./Components/Collections";
+import { useDispatch } from "react-redux";
+import { fetchDataRequest, fetchDataSuccess, fetchDataFailure } from "./redux/action";
 
 function App() {
-  let cards = [
-    {
-      key: uuidv4(),
-      content: (
-        <Card imagen="https://updates.theme-fusion.com/wp-content/uploads/2017/12/convertplus_thumbnail.jpg" />
-      )
-    },
-    {
-      key: uuidv4(),
-      content: (
-        <Card imagen="https://updates.theme-fusion.com/wp-content/uploads/2017/12/acf_pro.png" />
-      )
-    },
-    {
-      key: uuidv4(),
-      content: (
-        <Card imagen="https://updates.theme-fusion.com/wp-content/uploads/2017/12/layer_slider_plugin_thumb.png" />
-      )
-    },
-    {
-      key: uuidv4(),
-      content: (
-        <Card imagen="https://updates.theme-fusion.com/wp-content/uploads/2016/08/slider_revolution-1.png" />
-      )
-    },
-    {
-      key: uuidv4(),
-      content: (
-        <Card imagen="https://updates.theme-fusion.com/wp-content/uploads/2019/01/pwa_880_660.jpg" />
-      )
-    }
-  ];
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    AOS.init();
+    AOS.refresh();
+    dispatch(fetchDataRequest()); // This dispatch is optional and depends on your use case
+  }, [dispatch]);
+
   return (
-    <div className="">
-      <Carousel
-        cards={cards}
-        height="500px"
-        width="30%"
-        margin="0 auto"
-        offset={2}
-        showArrows={false}
-      />
-    </div>
+    <>
+      <Navbar />
+      <Collections />
+    </>
   );
 }
 

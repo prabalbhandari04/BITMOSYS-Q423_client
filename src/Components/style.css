@@ -1,0 +1,131 @@
+/* 
+.container {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+.with-blur {
+  backdrop-filter: blur(8px); /* Adjust the blur amount as needed */
+  background-color: rgba(224, 218, 218, 0); /* Adjust the opacity as needed */
+}
+
+
+.card {
+  transform-style: preserve-3d;
+  min-height: 30vh;
+  width: 35rem;
+  border-radius: 16px;
+  padding: 0rem 5rem;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  background: rgba(18, 2, 48, 0.31);
+  backdrop-filter: blur(12.8px);
+  -webkit-backdrop-filter: blur(12.8px);
+  /* Allow the card to rotate freely */
+  transform: rotateY(45deg);
+}
+
+.sneaker {
+  min-height: 35vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sneaker img {
+  width: 20rem;
+  z-index: 2;
+  transition: all 0.75s ease-out;
+  transform: rotateY(360deg);
+}
+
+.circle {
+  width: 15rem;
+  height: 15rem;
+  background: linear-gradient(
+      to right,
+      rgba(245, 70, 66, 0.75),
+      rgba(8, 83, 156, 0.75)
+  );
+  position: absolute;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.info h1 {
+  font-size: 3rem;
+  transition: all 0.75s ease-out;
+}
+
+.info h3 {
+  font-size: 1.3rem;
+  padding: 2rem 0rem;
+  color: #585858;
+  font-weight: lighter;
+  transition: all 0.75s ease-out;
+}
+
+.sizes {
+  display: flex;
+  justify-content: space-between;
+  transition: all 0.75s ease-out;
+}
+
+.sizes button {
+  padding: 0.5rem 2rem;
+  background: none;
+  border: none;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 30px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #585858;
+}
+
+button.active {
+  background: #585858;
+  color: white;
+}
+
+.purchase {
+  margin-top: 5rem;
+  transition: all 0.75s ease-out;
+}
+
+.purchase button {
+  width: 100%;
+  padding: 1rem 0rem;
+  background: #f54642;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 30px;
+  font-weight: bolder;
+}
+
+/* Glassmorphism Effect */
+.glass-card {
+  background: rgba(153, 124, 180, 0.5); /* Adjust the alpha value as needed */
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(28.7px);
+  -webkit-backdrop-filter: blur(28.7px); /* Adjust the blur value if needed */
+  /* Additional styles from https://css.glass */
+  /* Add other styles as needed */
+}
+
+
+.glass-card:hover {
+  transform: scale(1.05);
+  transition: all 0.3s ease-in-out;
+}
+
+
+.text-secondary {
+  color: /* your text color here */;
+}
+
+.glass-button {
+  background: /* your button color here */;
+  color: /* your button text color here */;
+}
