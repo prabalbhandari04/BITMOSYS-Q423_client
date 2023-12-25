@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
-import anime from 'animejs';
 import { AiOutlineSwap } from 'react-icons/ai';
+import anime from 'animejs';
 
 const shake = keyframes`
   0%, 100% {
@@ -31,6 +31,78 @@ const lightningCrackle = keyframes`
   100% {
     filter: hue-rotate(0deg);
   }
+`;
+
+const ModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(153, 124, 180, 0.5);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(28.7px);
+  -webkit-backdrop-filter: blur(28.7px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+`;
+
+const ModalContent = styled.div`
+  background: linear-gradient(to right, #6c0691, #040881);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  position: relative;
+  animation: ${keyframes`
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  `} 0.3s ease-out;
+`;
+
+const CryptoItem = styled.div`
+  flex-basis: calc(33.33% - 20px);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
+const CryptoLogo = styled.img`
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  border-radius: 50%;
+  object-fit: cover;
+`;
+
+const CryptoDetails = styled.div`
+  flex-grow: 1;
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #ffffff;
+  cursor: pointer;
 `;
 
 const LightningButton = styled.button`
@@ -67,10 +139,40 @@ const LightningButton = styled.button`
 `;
 
 const LightningButtonComponent = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+  useEffect(() => {
+    if (isModalOpen) {
+      // Animation using animejs
+      anime({
+        targets: '.modal-content',
+        opacity: [0, 1],
+        translateY: [-20, 0],
+        duration: 300,
+        easing: 'easeOut',
+      });
+    }
+  }, [isModalOpen]);
+
   return (
-    <LightningButton>
-      <AiOutlineSwap />
-    </LightningButton>
+    <>
+      <LightningButton onClick={openModal}>
+        <AiOutlineSwap />
+      </LightningButton>
+
+      {isModalOpen && (
+        <ModalOverlay onClick={closeModal}>
+        </ModalOverlay>
+      )}
+    </>
   );
 };
 

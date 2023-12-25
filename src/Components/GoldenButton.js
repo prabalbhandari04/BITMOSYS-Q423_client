@@ -47,6 +47,16 @@ const GoldenButton = styled.button`
   }
 `;
 
+const Header = styled.div`
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  position: relative;
+  overflow: hidden;
+  color: #ffffff;
+  transition: color 0.3s ease;
+`;
+
 const ModalOverlay = styled.div`
   position: fixed;
   top: 0;
@@ -65,7 +75,7 @@ const ModalOverlay = styled.div`
 `;
 
 const ModalContent = styled.div`
-  background: linear-gradient(to right, #2a0238, #0a0b31);
+  background: linear-gradient(to right, #6c0691, #040881);
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
@@ -135,7 +145,7 @@ const GoldenButtonComponent = () => {
 
   const handleButtonClick = async () => {
     try {
-      const response = await fetch('https://bitmosys-q423-server.onrender.com/api/v1/crypto/crypto');
+      const response = await fetch('https://bitmosys-q423-server.onrender.com/api/v1/wallet/wallet');
       const data = await response.json();
       setCryptoData(data);
       setModalOpen(true);
@@ -171,15 +181,22 @@ const GoldenButtonComponent = () => {
         <ModalOverlay>
           <ModalContent ref={modalRef}>
             <CloseButton onClick={handleCloseModal}>&times;</CloseButton>
-            {cryptoData.map((crypto) => (
-              <CryptoItem key={crypto._id}>
-                <CryptoLogo src={crypto.image} alt={`${crypto.name} Logo`} />
-                <CryptoDetails className='text-secondary'>
-                  <p>{crypto.symbol}</p>
-                  <p>Quantity: 10</p>
-                </CryptoDetails>
-              </CryptoItem>
-            ))}
+            {cryptoData.walletDetails && (
+              <Header>Coins: {cryptoData.totalCoins}</Header>
+            )}
+            {cryptoData.walletDetails && (
+              <Header>Total Coins: {cryptoData.walletDetails.totalCoinsInWallet}</Header>
+            )}
+            {cryptoData.walletDetails &&
+              cryptoData.walletDetails.coins.map((crypto) => (
+                <CryptoItem key={crypto._id}>
+                  <CryptoLogo src={crypto.cryptoLogo} alt={`${crypto.cryptoName} Logo`} />
+                  <CryptoDetails className='text-secondary'>
+                    <p>{crypto.cryptoSymbol}</p>
+                    <p>{crypto.quantity}</p>
+                  </CryptoDetails>
+                </CryptoItem>
+              ))}
           </ModalContent>
         </ModalOverlay>
       )}
