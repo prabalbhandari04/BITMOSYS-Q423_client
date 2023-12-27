@@ -99,29 +99,6 @@ const ModalOverlay = styled.div`
   z-index: 1000;
 `;
 
-
-const InputField = styled.input`
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #fff; // Adjust as needed
-  border-radius: 8px;
-  background-color: transparent;
-  color: #fff; // Adjust as needed
-`;
-
-const CoinSelectionContainer = styled.div`
-  flex-basis: 50%; // Adjust as needed
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-`;
-
-const CryptoDetails = styled.div`
-  flex-grow: 1;
-`;
-
 const ModalContent = styled.div`
   background: linear-gradient(to right, #6c0691, #040881);
   padding: 20px;
@@ -162,46 +139,6 @@ const CryptoLogo = styled.img`
   object-fit: cover;
 `;
 
-const CoinDetailsContainer = styled.div`
-  flex-basis: 100%;
-  margin-top: 20px;
-`;
-
-const CoinSelectionLabel = styled.p`
-  margin-bottom: 10px;
-  color: #fff;
-`;
-
-const CoinInputContainer = styled.div`
-  display: flex;
-  gap: 10px;
-`;
-
-const CoinSelectionInput = styled.select`
-  width: 50%;
-  padding: 10px;
-  border: 1px solid #fff;
-  border-radius: 8px;
-  background-color: transparent;
-  color: #120230;
-`;
-
-const CoinQuantityInput = styled.input`
-  width: 50%;
-  padding: 10px;
-  border: 1px solid #fff;
-  border-radius: 8px;
-  background-color: transparent;
-  color: #fff;
-`;
-
-const InputContainer = styled.div`
-  flex-basis: 100%;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-`;
 const CloseButton = styled.button`
   position: absolute;
   top: 10px;
@@ -213,7 +150,7 @@ const CloseButton = styled.button`
   cursor: pointer;
 `;
 
-const Collections = () => {
+const Crypto = () => {
   const dispatch = useDispatch();
   const { data, loading, error } = useSelector((state) => state);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -221,7 +158,6 @@ const Collections = () => {
   const [walletDetails, setWalletDetails] = useState({});
   const [selectedCrypto, setSelectedCrypto] = useState(null);
   const [quantityToSwap, setQuantityToSwap] = useState('');
-  const [selectedCoin, setSelectedCoin] = useState(null);
 
   const modalRef = useRef();
 
@@ -308,51 +244,30 @@ const Collections = () => {
     }
   };
   
- 
+  const handleSelectionChange = (e) => {
+    e.stopPropagation();
+    
+    setSelectedCrypto(e.target.value);
+    setQuantityToSwap(''); // Reset quantity when selecting a new coin
+  };
 
-
-  const handleSwap = async (coinId) => {
-    if (!selectedCoin) {
-      console.error('No coin selected');
-      return;
-    }
-
+  const handleSwap = async () => {
     try {
-      const response = await axios.post(
-        `https://bitmosys-q423-server.onrender.com/api/v1/wallet/exchange/${selectedCrypto}`,
-        {
-          quantity: Number(quantityToSwap),
-          destinationCryptoId: coinId
-        }
-      );
-      alert('Swap success:', response.data)
+      const response = await axios.post('https://bitmosys-q423-server.onrender.com/api/v1/wallet/exchange', {
+        quantity: quantityToSwap,
+        destinationCryptoId: selectedCrypto, // Use selectedCrypto instead of destinationCryptoId
+      });
+  
       console.log('Swap success:', response.data);
     } catch (error) {
-      alert('Error swapping:', error)
       console.error('Error swapping:', error);
     }
   };
-
   
 
 
   const openModal = () => {
     setIsModalOpen(true);
-  };
-
-  const handleSelectionChange = (e) => {
-    const selectedCryptoId = e.target.value;
-    setSelectedCrypto(selectedCryptoId);
-  
-    // Find the selected coin details
-    const selectedCoinDetails = walletDetails.coins.find((coin) => coin.crypto === selectedCryptoId);
-    setSelectedCoin(selectedCoinDetails);
-  
-    setQuantityToSwap(''); // Reset quantity when selecting a new coin
-  };
-  
-  const handleQuantityChange = (e) => {
-    setQuantityToSwap(parseFloat(e.target.value));
   };
 
   useEffect(() => {
@@ -373,6 +288,7 @@ const Collections = () => {
 
   return (
     <CollectionsContainer>
+    <h1>crypto page</h1>
       {data.map((item) => (
         <GlassCard
           key={item.id}
@@ -395,37 +311,16 @@ const Collections = () => {
           </div>
         </GlassCard>
       ))}
-            {isModalOpen && (
+      {isModalOpen && (
         <ModalOverlay onClick={closeModal}>
           <ModalContent className="modal-content" ref={modalRef}>
             <CloseButton onClick={closeModal}>X</CloseButton>
             <CryptoItem>
-              <CryptoDetails className="text-secondary">
-                <CryptoLogo src={cryptoData.image} alt={`${cryptoData.name} Logo`} />
-                <p>{cryptoData.symbol}</p>
-              </CryptoDetails>
+              <CryptoLogo src={cryptoData.image} alt={`${cryptoData.name} Logo`} />
+              <p>{cryptoData.symbol}</p>
             </CryptoItem>
-            <CoinDetailsContainer>
-            <CoinSelectionLabel>Select a coin:</CoinSelectionLabel>
-            <CoinInputContainer>
-              <CoinSelectionInput onChange={handleSelectionChange} value={selectedCrypto}>
-                {walletDetails.coins.map((coin) => (
-                  <option key={coin._id} value={coin.crypto}>
-                    {coin.cryptoName} - {coin.cryptoSymbol} - {coin.quantity} coins
-                  </option>
-                ))}
-              </CoinSelectionInput>
-              <CoinQuantityInput
-                type="number"
-                placeholder="Enter quantity"
-                value={quantityToSwap}
-                onChange={handleQuantityChange}
-              />
-            </CoinInputContainer>
-          </CoinDetailsContainer>
-            <div>
-            <LightningButton onClick={() => handleSwap(cryptoData._id)}>Swap</LightningButton>
-            </div>
+            {/* ... (previous code) */}
+            <LightningButton onClick={handleSwap}>Swap</LightningButton>
           </ModalContent>
         </ModalOverlay>
       )}
@@ -433,4 +328,4 @@ const Collections = () => {
   );
 };
 
-export default Collections;
+export default Crypto;
