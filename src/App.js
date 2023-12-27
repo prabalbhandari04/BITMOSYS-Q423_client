@@ -1,11 +1,13 @@
 // App.js
 import React, { useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import Navbar from "./Components/Navbar";
 import Collections from "./Components/Collections";
+import Crypto from "./Components/Crypto"; // Import the Crypto component
 import { useDispatch } from "react-redux";
-import { fetchDataRequest, fetchDataSuccess, fetchDataFailure } from "./redux/action";
+import { fetchDataRequest } from "./redux/action";
 
 function App() {
   const dispatch = useDispatch();
@@ -13,14 +15,32 @@ function App() {
   useEffect(() => {
     AOS.init();
     AOS.refresh();
-    dispatch(fetchDataRequest()); // This dispatch is optional and depends on your use case
+    dispatch(fetchDataRequest());
   }, [dispatch]);
 
   return (
-    <>
-      <Navbar />
-      <Collections />
-    </>
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div>
+              <Navbar />
+              <Collections />
+            </div>
+          }
+        />
+         <Route
+          path="/buy-crypto"
+          element={
+            <div>
+               <Navbar />
+              <Crypto />
+            </div>
+          }
+        />
+      </Routes>
+    </Router>
   );
 }
 

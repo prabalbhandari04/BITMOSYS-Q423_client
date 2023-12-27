@@ -6,7 +6,8 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import styled, { keyframes } from 'styled-components';
 import { AiOutlineSwap } from 'react-icons/ai';
-
+import GoldenButtonComponent from './GoldenButton';
+import BuyButtonComponent from "./Buybuton"
 const shake = keyframes`
   0%, 100% {
     transform: translateX(0);
@@ -18,6 +19,25 @@ const shake = keyframes`
     transform: translateX(3px);
   }
 `;
+
+const CryptoDetails = styled.div`
+  flex-grow: 1;
+`;
+const shimmerAnimation = keyframes`
+  0% {
+    transform-origin: bottom right;
+    transform: scaleX(0);
+  }
+  50% {
+    transform-origin: bottom left;
+    transform: scaleX(1);
+  }
+  100% {
+    transform-origin: bottom right;
+    transform: scaleX(0);
+  }
+`;
+
 
 const CollectionsContainer = styled.div`
   display: flex;
@@ -51,35 +71,33 @@ const CryptoInfo = styled.div`
 `;
 
 const LightningButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-  color: #120230;
-  background-color: #e0e8ef;
-  border-style: solid;
-  border-width: 2px;
-  border-color: rgba(255, 255, 255, 0.333);
-  border-radius: 40px;
-  padding: 10px;
-  transform: translate(0px, 0px) rotate(0deg);
-  transition: 0.2s;
+background-color: gold;
+color: #333;
+border: none;
+padding: 10px 20px;
+font-size: 18px;
+cursor: pointer;
+position: relative;
+overflow: hidden;
+transition: color 0.3s ease;
 
-  &:hover {
-    color: #442e75;
-    background-color: #e5edf5;
-    box-shadow: -2px -1px 8px 0px #e5edf5, 2px 1px 8px 0px rgba(47, 2, 101, 0.48);
-    animation: ${shake} 0.3s ease-in-out infinite;
+&:hover {
+  color: #333;
+  &:before {
+    animation: ${shimmerAnimation} 1.5s infinite;
   }
+}
 
-  &:active {
-    box-shadow: none;
-  }
+&:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: black;
+  background: linear-gradient(45deg, #fff, rgba(255, 255, 255, 0) 35%);
+}
 `;
 
 const ModalOverlay = styled.div`
@@ -288,7 +306,6 @@ const Crypto = () => {
 
   return (
     <CollectionsContainer>
-    <h1>crypto page</h1>
       {data.map((item) => (
         <GlassCard
           key={item.id}
@@ -311,16 +328,18 @@ const Crypto = () => {
           </div>
         </GlassCard>
       ))}
-      {isModalOpen && (
+            {isModalOpen && (
         <ModalOverlay onClick={closeModal}>
           <ModalContent className="modal-content" ref={modalRef}>
             <CloseButton onClick={closeModal}>X</CloseButton>
             <CryptoItem>
-              <CryptoLogo src={cryptoData.image} alt={`${cryptoData.name} Logo`} />
-              <p>{cryptoData.symbol}</p>
+              <CryptoDetails className="text-secondary">
+                <CryptoLogo src={cryptoData.image} alt={`${cryptoData.name} Logo`} />
+                <p>{cryptoData.symbol}</p>
+              </CryptoDetails>
             </CryptoItem>
-            {/* ... (previous code) */}
-            <LightningButton onClick={handleSwap}>Swap</LightningButton>
+          
+        
           </ModalContent>
         </ModalOverlay>
       )}

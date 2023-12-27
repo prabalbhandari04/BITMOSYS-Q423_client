@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { BiMenu, BiXCircle } from "react-icons/bi";
 import { FaBitcoin } from "react-icons/fa";
+import { Link } from "react-router-dom";
 import "./button.css";
-import LightningButton from "./Button";
 import GoldenButtonComponent from "./GoldenButton";
 
 export default function Navbar() {
@@ -11,9 +11,9 @@ export default function Navbar() {
   return (
     <nav className={`px-2 sm:px-2 py-2.5 relative ${menuOpen ? 'bg-background' : ''}`}>
       <div className="container flex flex-wrap justify-between items-center mx-auto">
-        <a href="#x" className="text-3xl font-bold text-secondary">
+        <Link to="/" className="text-3xl font-bold text-secondary">
           II
-        </a>
+        </Link>
         <div className="flex text-secondary md:hidden">
           <button type="button" onClick={() => setMenuOpen(!menuOpen)}>
             {menuOpen ? <BiXCircle size={30} /> : <BiMenu size={30} />}
@@ -29,29 +29,14 @@ export default function Navbar() {
           ></div>
         )}
 
-        <div
-          className={`${
-            menuOpen ? "flex" : "hidden"
-          } justify-center items-center w-full h-full fixed top-0 left-0 md:w-auto md:order-1 z-52`}
-        >
-          <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 text-xl text-secondary">
-            <li className="color-secondary py-2 md:py-0 flex items-center">
-              <a
-                href="#x"
-                className="py-4 pr-6 pl-0 color-secondary transition-all flex items-center"
-              >
-                Buy
-                <span className="ml-2">
-                  <FaBitcoin className="text-golden transform rotate-0 hover:rotate-90 transition-all" />
-                </span>
-              </a>
-            </li>
-            <GoldenButtonComponent>Wallet</GoldenButtonComponent>
-          </ul>
+        {/* Combined Buy and GoldenButton in a single row */}
+        <div className="flex items-center">
+          <Link to="/buy-crypto" className="py-4 pr-6 pl-0 color-secondary transition-all">
+            Buy
+          </Link>
+          <GoldenButtonComponent hoverShimmer>Wallet</GoldenButtonComponent>
         </div>
-        <GoldenButtonComponent>Wallet</GoldenButtonComponent>
       </div>
-      
     </nav>
   );
 }

@@ -408,13 +408,15 @@ const Collections = () => {
             <CoinDetailsContainer>
             <CoinSelectionLabel>Select a coin:</CoinSelectionLabel>
             <CoinInputContainer>
-              <CoinSelectionInput onChange={handleSelectionChange} value={selectedCrypto}>
-                {walletDetails.coins.map((coin) => (
+            <CoinSelectionInput onChange={handleSelectionChange} value={selectedCrypto}>
+              {walletDetails.coins
+                .filter((coin) => coin.quantity > 0 && coin !== selectedCoin)
+                .map((coin) => (
                   <option key={coin._id} value={coin.crypto}>
                     {coin.cryptoName} - {coin.cryptoSymbol} - {coin.quantity} coins
                   </option>
                 ))}
-              </CoinSelectionInput>
+            </CoinSelectionInput>
               <CoinQuantityInput
                 type="number"
                 placeholder="Enter quantity"
