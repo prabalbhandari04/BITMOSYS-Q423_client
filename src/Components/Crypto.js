@@ -10,6 +10,7 @@ import BuyButton from "./Buybuton"
 import toast from 'react-hot-toast';
 import { MutatingDots } from 'react-loader-spinner'; 
 
+
 const shake = keyframes`
   0%, 100% {
     transform: translateX(0);
@@ -22,19 +23,23 @@ const shake = keyframes`
   }
 `;
 
-const FullScreenLoader = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to right, #2a0238, #0a0b31);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
+const electricCrackle = keyframes`
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
 `;
 
+const pulsingBlue = keyframes`
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 0%;
+  }
+`;
 
 const LightningButton = styled.button`
   display: flex;
@@ -53,20 +58,47 @@ const LightningButton = styled.button`
   border-color: rgba(255, 255, 255, 0.333);
   border-radius: 40px;
   padding: 10px;
-  transform: translate(0px, 0px) rotate(0deg);
-  transition: 0.2s;
+  position: relative;
+  overflow: hidden;
 
   &:hover {
     color: #442e75;
     background-color: #e5edf5;
     box-shadow: -2px -1px 8px 0px #e5edf5, 2px 1px 8px 0px rgba(47, 2, 101, 0.48);
-    animation: ${shake} 0.3s ease-in-out infinite;
+    animation: ${shake} 0.3s ease-in-out infinite, ${electricCrackle} 0.5s ease-in-out infinite;
   }
 
   &:active {
     box-shadow: none;
   }
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(90deg, transparent, rgba(0, 0, 255, 0.2), transparent);
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    animation: ${pulsingBlue} 1s linear infinite;
+  }
 `;
+
+
+const FullScreenLoader = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, #2a0238, #0a0b31);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+`;
+
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -114,11 +146,13 @@ const ModalContent = styled.div`
   border-radius: 12px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   max-width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: space-between;
   position: relative;
   animation: ${keyframes`
     0% {
@@ -133,24 +167,17 @@ const ModalContent = styled.div`
 `;
 
 const CryptoItem = styled.div`
+
   flex-basis: calc(33.33% - 20px);
   box-sizing: border-box;
-  display: flex;
-  align-items: center;
   margin-bottom: 20px;
 `;
 
 const CryptoLogo = styled.img`
   width: 40px;
   height: 40px;
-  margin-right: 10px;
   border-radius: 50%;
   object-fit: cover;
-`;
-
-const CoinDetailsContainer = styled.div`
-  flex-basis: 100%;
-  margin-top: 20px;
 `;
 
 const CoinSelectionLabel = styled.p`
@@ -172,8 +199,27 @@ const CoinSelectionInput = styled.select`
   color: #120230;
 `;
 
+const CenteredModalContent = styled(ModalContent)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const CryptoItemWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const CryptoDetailsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+`;
+
 const CoinQuantityInput = styled.input`
-  width: 50%;
+  width: 100%;
   padding: 10px;
   border: 1px solid #fff;
   border-radius: 8px;
@@ -272,7 +318,7 @@ const Crypto = () => {
   const [cryptoData, setCryptoData] = useState({});
   const [walletDetails, setWalletDetails] = useState({});
   const [selectedCrypto, setSelectedCrypto] = useState(null);
-  const [quantityToSwap, setQuantityToSwap] = useState(1);
+  const [quantityToSwap, setQuantityToSwap] = useState();
   const [selectedCoin, setSelectedCoin] = useState(null);
   const modalRef = useRef();
 
@@ -516,30 +562,30 @@ const Crypto = () => {
           </CryptoInfo>
         </GlassCard>
       ))}
-      {isModalOpen && (
+        {isModalOpen && (
         <ModalOverlay onClick={closeModal}>
-          <ModalContent className="modal-content" ref={modalRef}>
+          <CenteredModalContent className="modal-content" ref={modalRef}>
             <CloseButton onClick={closeModal}>X</CloseButton>
-            <CryptoItem>
-              <CryptoDetails className="text-secondary">
-                <CryptoLogo src={cryptoData.image} alt={`${cryptoData.name} Logo`} />
-                <p>{cryptoData.symbol}</p>
-              </CryptoDetails>
-            </CryptoItem>
-            <CoinDetailsContainer>
-              <CoinInputContainer>
+            <CryptoItemWrapper>
+              <CryptoItem>
+                <CryptoDetailsContainer className="text-secondary">
+                  <CryptoLogo src={cryptoData.image} alt={`${cryptoData.name} Logo`} />
+                  <p>{cryptoData.symbol}</p>
+                </CryptoDetailsContainer>
+              </CryptoItem>
+            </CryptoItemWrapper>
+            <CryptoItemWrapper>
                 <CoinQuantityInput
                   type="number"
                   placeholder="Enter quantity"
                   value={quantityToSwap}
                   onChange={handleQuantityChange}
                 />
-              </CoinInputContainer>
-            </CoinDetailsContainer>
+            </CryptoItemWrapper>
             <div>
               <LightningButton onClick={() => handleBuy(cryptoData._id)}>Buy</LightningButton>
             </div>
-          </ModalContent>
+          </CenteredModalContent>
         </ModalOverlay>
       )}
     </CollectionsContainer>
