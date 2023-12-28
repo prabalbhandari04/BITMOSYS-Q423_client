@@ -8,6 +8,7 @@ import Collections from "./Components/Collections";
 import Crypto from "./Components/Crypto"; // Import the Crypto component
 import { useDispatch } from "react-redux";
 import { fetchDataRequest } from "./redux/action";
+import { Toaster } from "react-hot-toast"; // Import Toaster
 
 function App() {
   const dispatch = useDispatch();
@@ -25,16 +26,18 @@ function App() {
           path="/"
           element={
             <div>
+              <Toaster position="top-center" reverseOrder={false} /> {/* Add Toaster here */}
               <Navbar />
               <Collections />
             </div>
           }
         />
-         <Route
+        <Route
           path="/buy-crypto"
           element={
             <div>
-               <Navbar />
+              <Toaster position="top-center" reverseOrder={false} /> {/* Add Toaster here */}
+              <Navbar />
               <Crypto />
             </div>
           }

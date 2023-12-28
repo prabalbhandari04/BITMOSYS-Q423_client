@@ -6,6 +6,9 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import styled, { keyframes } from 'styled-components';
 import { AiOutlineSwap } from 'react-icons/ai';
+import toast from 'react-hot-toast';
+import { MutatingDots } from 'react-loader-spinner'; // Correct import statement for TailSpin
+
 
 const shake = keyframes`
   0%, 100% {
@@ -39,12 +42,24 @@ const GlassCard = styled.div`
   }
 `;
 
-const CryptoImage = styled.img`
+const FullScreenLoader = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: auto;
-  border-radius: 8px;
+  height: 100%;
+  background: linear-gradient(to right, #2a0238, #0a0b31);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 `;
 
+const CryptoImage = styled.img`
+  width: 100%;
+  height: 250px;
+  border-radius: 8px;
+`;
 const CryptoInfo = styled.div`
   margin-top: 10px;
   text-align: center;
@@ -192,7 +207,7 @@ const CoinQuantityInput = styled.input`
   border: 1px solid #fff;
   border-radius: 8px;
   background-color: transparent;
-  color: #fff;
+  color: #ffffff;
 `;
 
 const InputContainer = styled.div`
@@ -308,16 +323,15 @@ const Collections = () => {
     }
   };
   
- 
-
-
+  
   const handleSwap = async (coinId) => {
-    if (!selectedCoin) {
-      console.error('No coin selected');
+    if (!selectedCrypto) {
+      toast.error('No coin selected');
       return;
     }
-
+  
     try {
+  
       const response = await axios.post(
         `https://bitmosys-q423-server.onrender.com/api/v1/wallet/exchange/${selectedCrypto}`,
         {
@@ -325,16 +339,19 @@ const Collections = () => {
           destinationCryptoId: coinId
         }
       );
-      alert('Swap success:', response.data)
-      console.log('Swap success:', response.data);
+  
+      toast.success(response.data.message);
+        setIsModalOpen(false)
+
     } catch (error) {
-      alert('Error swapping:', error)
-      console.error('Error swapping:', error);
+      toast.error(error.message);
+      alert('Error swapping:', error);
+      setIsModalOpen(false)
     }
   };
-
   
-
+  
+  
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -351,6 +368,13 @@ const Collections = () => {
     setQuantityToSwap(''); // Reset quantity when selecting a new coin
   };
   
+  // Reset selectedCoin to null when user selects a new crypto
+  useEffect(() => {
+    setSelectedCoin(null);
+  }, [selectedCrypto]);
+  
+  
+  
   const handleQuantityChange = (e) => {
     setQuantityToSwap(parseFloat(e.target.value));
   };
@@ -364,13 +388,28 @@ const Collections = () => {
   }, []);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <FullScreenLoader>
+        <MutatingDots
+  visible={true}
+  height="100"
+  width="100"
+  color="#ffffff"
+  secondaryColor="#ffffff"
+  radius="12.5"
+  ariaLabel="mutating-dots-loading"
+  wrapperStyle={{}}
+  wrapperClass=""
+  />
+      </FullScreenLoader>
+    );
   }
 
   if (error) {
     return <p>Error: {error}</p>;
   }
 
+  
   return (
     <CollectionsContainer>
       {data.map((item) => (

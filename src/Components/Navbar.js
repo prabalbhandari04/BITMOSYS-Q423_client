@@ -14,12 +14,6 @@ export default function Navbar() {
         <Link to="/" className="text-3xl font-bold text-secondary">
           II
         </Link>
-        <div className="flex text-secondary md:hidden">
-          <button type="button" onClick={() => setMenuOpen(!menuOpen)}>
-            {menuOpen ? <BiXCircle size={30} /> : <BiMenu size={30} />}
-          </button>
-        </div>
-
         {/* Overlay */}
         {menuOpen && (
           <div
@@ -31,7 +25,7 @@ export default function Navbar() {
 
         {/* Combined Buy and GoldenButton in a single row */}
         <div className="flex items-center">
-          <Link to="/buy-crypto" className="py-4 pr-6 pl-0 color-secondary transition-all">
+          <Link to="/buy-crypto" className="py-4 pr-6 pl-0 text-secondary transition-all">
             Buy
           </Link>
           <GoldenButtonComponent hoverShimmer>Wallet</GoldenButtonComponent>
