@@ -92,17 +92,34 @@ const CollectionsContainer = styled.div`
 
 const GlassCard = styled.div`
   position: relative;
-  width: 20%;
+  width: calc(20% - 2%);
   margin: 1%;
   padding: 2%;
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease-in-out;
 
+  @media (max-width: 1200px) {
+    width: calc(25% - 2%);
+  }
+
+  @media (max-width: 992px) {
+    width: calc(33.33% - 2%);
+  }
+
+  @media (max-width: 768px) {
+    width: calc(50% - 2%);
+  }
+
+  @media (max-width: 576px) {
+    width: calc(100% - 2%);
+  }
+
   &:hover {
     transform: scale(1.05);
   }
 `;
+
 
 const FullScreenLoader = styled.div`
   position: fixed;

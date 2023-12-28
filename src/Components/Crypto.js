@@ -100,6 +100,23 @@ const FullScreenLoader = styled.div`
 `;
 
 
+const GlassCard = styled.div`
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  width: 80%;
+  padding: 5%;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease-in-out;
+  transform: translate(-50%, -50%) rotateY(${(props) => props.rotation}deg) translateZ(300px);
+  opacity: ${(props) => (props.isVisible ? 1 : 0)};
+  pointer-events: ${(props) => (props.isVisible ? 'auto' : 'none')};
+  z-index: ${(props) => (props.isVisible ? 2 : 1)};
+`;
+
+
+
 const ModalOverlay = styled.div`
   position: fixed;
   top: 0;
@@ -117,6 +134,31 @@ const ModalOverlay = styled.div`
   z-index: 1000;
 `;
 
+const CenteredModalContent = styled.div`
+  background: linear-gradient(to right, #6c0691, #040881);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  position: relative;
+  animation: ${keyframes`
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  `} 0.3s ease-out;
+`;
 
 const InputField = styled.input`
   width: 100%;
@@ -199,11 +241,7 @@ const CoinSelectionInput = styled.select`
   color: #120230;
 `;
 
-const CenteredModalContent = styled(ModalContent)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+
 
 const CryptoItemWrapper = styled.div`
   display: flex;
@@ -255,20 +293,6 @@ const CollectionsContainer = styled.div`
   justify-content: center;
 `;
 
-const GlassCard = styled.div`
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  width: 20%;
-  padding: 2%;
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.2);
-  transition: transform 0.3s ease-in-out;
-  transform: translate(-50%, -50%) rotateY(${(props) => props.rotation}deg) translateZ(300px);
-  opacity: ${(props) => (props.isVisible ? 1 : 0)};
-  pointer-events: ${(props) => (props.isVisible ? 'auto' : 'none')};
-  z-index: ${(props) => (props.isVisible ? 2 : 1)};
-`;
 
 const BuyButtonContainer = styled.div`
   position: absolute;
@@ -294,20 +318,30 @@ const CryptoInfo = styled.div`
 const ButtonContainer = styled.div`
   position: absolute;
   top: 40%;
-  width: 35%;
+  width: 90%;
   display: flex;
   justify-content: space-between;
   pointer-events: none;
+
+  @media (max-width: 768px) {
+    top: 40%;
+  width: 90%;
+  }
 `;
 
 const Button = styled.button`
   background-color: ${(props) => (props.secondary ? '#6c0691' : 'gold')};
   color: #333;
   border: none;
-  padding: 10px 20px;
-  font-size: 18px;
+  padding: 10px 15px;
+  font-size: 14px;
   cursor: pointer;
   pointer-events: auto;
+
+  @media (max-width: 768px) {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
 `;
 
 const Crypto = () => {
