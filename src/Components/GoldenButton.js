@@ -55,7 +55,13 @@ const Header = styled.div`
   overflow: hidden;
   color: #ffffff;
   transition: color 0.3s ease;
+
+  display: flex-center;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Optional: Set a specific height if needed */
 `;
+
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -129,6 +135,14 @@ const CloseButton = styled.button`
   cursor: pointer;
 `;
 
+const CoinDetailsContainer = styled.div`
+  flex-basis: 100%;
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+`;
 const GoldenButtonComponent = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [cryptoData, setCryptoData] = useState([]);
@@ -187,6 +201,7 @@ const GoldenButtonComponent = () => {
             {cryptoData.walletDetails && (
               <Header>Total Coins: {cryptoData.walletDetails.totalCoinsInWallet}</Header>
             )}
+            <CoinDetailsContainer>
             {cryptoData.walletDetails &&
               cryptoData.walletDetails.coins.map((crypto) => (
                 <CryptoItem key={crypto._id}>
@@ -197,6 +212,8 @@ const GoldenButtonComponent = () => {
                   </CryptoDetails>
                 </CryptoItem>
               ))}
+            </CoinDetailsContainer>
+           
           </ModalContent>
         </ModalOverlay>
       )}
