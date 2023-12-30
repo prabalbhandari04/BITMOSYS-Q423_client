@@ -9,6 +9,7 @@ import { AiOutlineSwap } from 'react-icons/ai';
 import toast from 'react-hot-toast';
 import { MutatingDots } from 'react-loader-spinner'; // Correct import statement for TailSpin
 
+
 const shake = keyframes`
   0%, 100% {
     transform: translateX(0);
@@ -21,69 +22,6 @@ const shake = keyframes`
   }
 `;
 
-const electricCrackle = keyframes`
-  0%, 100% {
-    opacity: 0.8;
-  }
-  50% {
-    opacity: 1;
-  }
-`;
-
-const pulsingBlue = keyframes`
-  0% {
-    background-position: 0% 0%;
-  }
-  100% {
-    background-position: 100% 0%;
-  }
-`;
-
-const LightningButton = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  font-family: inherit;
-  font-size: 13px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.4px;
-  color: #120230;
-  background-color: #e0e8ef;
-  border-style: solid;
-  border-width: 2px;
-  border-color: rgba(255, 255, 255, 0.333);
-  border-radius: 40px;
-  padding: 10px;
-  position: relative;
-  overflow: hidden;
-
-  &:hover {
-    color: #442e75;
-    background-color: #e5edf5;
-    box-shadow: -2px -1px 8px 0px #e5edf5, 2px 1px 8px 0px rgba(47, 2, 101, 0.48);
-    animation: ${shake} 0.3s ease-in-out infinite, ${electricCrackle} 0.5s ease-in-out infinite;
-  }
-
-  &:active {
-    box-shadow: none;
-  }
-
-  &:before {
-    content: '';
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    background: linear-gradient(90deg, transparent, rgba(0, 0, 255, 0.2), transparent);
-    top: 0;
-    left: 0;
-    pointer-events: none;
-    animation: ${pulsingBlue} 1s linear infinite;
-  }
-`;
-
-
 const CollectionsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -92,34 +30,17 @@ const CollectionsContainer = styled.div`
 
 const GlassCard = styled.div`
   position: relative;
-  width: calc(20% - 2%);
+  width: 20%;
   margin: 1%;
   padding: 2%;
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease-in-out;
 
-  @media (max-width: 1200px) {
-    width: calc(25% - 2%);
-  }
-
-  @media (max-width: 992px) {
-    width: calc(33.33% - 2%);
-  }
-
-  @media (max-width: 768px) {
-    width: calc(50% - 2%);
-  }
-
-  @media (max-width: 576px) {
-    width: calc(100% - 2%);
-  }
-
   &:hover {
     transform: scale(1.05);
   }
 `;
-
 
 const FullScreenLoader = styled.div`
   position: fixed;
@@ -144,6 +65,37 @@ const CryptoInfo = styled.div`
   text-align: center;
 `;
 
+const LightningButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: #120230;
+  background-color: #e0e8ef;
+  border-style: solid;
+  border-width: 2px;
+  border-color: rgba(255, 255, 255, 0.333);
+  border-radius: 40px;
+  padding: 10px;
+  transform: translate(0px, 0px) rotate(0deg);
+  transition: 0.2s;
+
+  &:hover {
+    color: #442e75;
+    background-color: #e5edf5;
+    box-shadow: -2px -1px 8px 0px #e5edf5, 2px 1px 8px 0px rgba(47, 2, 101, 0.48);
+    animation: ${shake} 0.3s ease-in-out infinite;
+  }
+
+  &:active {
+    box-shadow: none;
+  }
+`;
 
 const ModalOverlay = styled.div`
   position: fixed;
@@ -188,13 +140,12 @@ const CryptoDetails = styled.div`
 const ModalContent = styled.div`
   background: linear-gradient(to right, #6c0691, #040881);
   padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   border-radius: 12px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   max-width: 600px;
   width: 100%;
+  display: flex;
+  flex-wrap: wrap;
   gap: 20px;
   justify-content: space-between;
   position: relative;
@@ -227,12 +178,8 @@ const CryptoLogo = styled.img`
 `;
 
 const CoinDetailsContainer = styled.div`
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
   flex-basis: 100%;
-  width : 100%;
-  gap : 5px;
+  margin-top: 20px;
 `;
 
 const CoinSelectionLabel = styled.p`
@@ -242,9 +189,8 @@ const CoinSelectionLabel = styled.p`
 
 const CoinInputContainer = styled.div`
   display: flex;
-  width : 100%;
+  gap: 10px;
 `;
-
 
 const CoinSelectionInput = styled.select`
   width: 50%;
@@ -252,12 +198,7 @@ const CoinSelectionInput = styled.select`
   border: 1px solid #fff;
   border-radius: 8px;
   background-color: transparent;
-  color: #ffffff;
-  gap : 5px;
-
-  &:hover {
-    background-color: #120230; /* Adjust the alpha value for hover transparency */
-  }
+  color: #120230;
 `;
 
 const CoinQuantityInput = styled.input`
@@ -504,23 +445,24 @@ const Collections = () => {
               </CryptoDetails>
             </CryptoItem>
             <CoinDetailsContainer>
+            <CoinSelectionLabel>Select a coin:</CoinSelectionLabel>
+            <CoinInputContainer>
             <CoinSelectionInput onChange={handleSelectionChange} value={selectedCrypto}>
-  {walletDetails.coins
-    .filter((coin) => coin.quantity > 0 && coin.crypto !== selectedCrypto)
-    .map((coin) => (
-      <option key={coin._id} value={coin.crypto}>
-        {coin.cryptoSymbol} - {coin.quantity} coins
-      </option>
-    ))}
-</CoinSelectionInput>
-
-
-            <CoinQuantityInput
+              {walletDetails.coins
+                .filter((coin) => coin.quantity > 0 && coin !== selectedCoin)
+                .map((coin) => (
+                  <option key={coin._id} value={coin.crypto}>
+                    {coin.cryptoName} - {coin.cryptoSymbol} - {coin.quantity} coins
+                  </option>
+                ))}
+            </CoinSelectionInput>
+              <CoinQuantityInput
                 type="number"
                 placeholder="Enter quantity"
                 value={quantityToSwap}
                 onChange={handleQuantityChange}
               />
+            </CoinInputContainer>
           </CoinDetailsContainer>
             <div>
             <LightningButton onClick={() => handleSwap(cryptoData._id)}>Swap</LightningButton>
@@ -533,17 +475,3 @@ const Collections = () => {
 };
 
 export default Collections;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
