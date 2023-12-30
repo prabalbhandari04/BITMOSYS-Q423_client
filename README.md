@@ -1,6 +1,12 @@
-# Crypto Swap
+
+# CryptoSwap
+
 
 Welcome to Crypto Swap, a dynamic and responsive cryptocurrency swapping platform with a wallet feature. This platform allows users to buy, exchange, and manage a portfolio of 10 different cryptocurrencies. The application is built using React, Redux for state management, styled components for styling, and Tailwind CSS for utility-first styling. The server-side code is hosted at [https://github.com/prabalbhandari04/BITMOSYS-Q423-server](https://github.com/prabalbhandari04/BITMOSYS-Q423-server).
+
+
+
+
 
 ## Table of Contents
 1. [Installation](#installation)
@@ -18,6 +24,10 @@ Welcome to Crypto Swap, a dynamic and responsive cryptocurrency swapping platfor
 4. [Contributing](#contributing)
 5. [License](#license)
 
+## Deployment
+
+To deploy this project first clone the project
+
 ## Installation
 
 To get started with Crypto Swap, follow these steps:
@@ -32,13 +42,17 @@ To get started with Crypto Swap, follow these steps:
    ```bash
    cd BITMOSYS-Q423_client
 
-3. Install dependancies
-```bash
-  npm install
+2. Installation of dependancies:
 
-4. Start the server
-  ```bash
-  npm start
+   ```bash
+   npm install
+
+
+2. Start Server:
+
+   ```bash
+   npm start
+
 ## Features
 
 - **Crypto Coins:**
@@ -82,5 +96,3 @@ Contributions to Crypto Swap are welcome! If you find any issues or have suggest
 ## License
 
 Crypto Swap is released under the MIT License. Feel free to use, modify, and distribute the code according to the terms of the license.
-
-
