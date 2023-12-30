@@ -26,7 +26,7 @@ export default function Navbar() {
         {/* Combined Buy and GoldenButton in a single row */}
         <div className="flex items-center">
           <Link to="/buy-crypto" className="py-4 pr-6 pl-0 text-secondary transition-all">
-            Buy
+            Buy Cryptos
           </Link>
           <GoldenButtonComponent hoverShimmer>Wallet</GoldenButtonComponent>
         </div>
