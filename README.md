@@ -33,48 +33,51 @@ To get started with Crypto Swap, follow these steps:
    cd BITMOSYS-Q423_client
 
 3. Install dependancies
-
-  ```bash
+```bash
   npm install
 
 4. Start the server
-
   ```bash
   npm start
-
-
 ## Features
-Crypto Coins
 
-Crypto Swap supports 10 different cryptocurrencies, providing users with a diverse range of investment options.
-Wallet Feature
+- **Crypto Coins:**
+  Crypto Swap supports 10 different cryptocurrencies, providing users with a diverse range of investment options.
 
-The wallet feature allows users to manage their cryptocurrency portfolio, view balances, and track transactions.
-Buying Crypto
+- **Wallet Feature:**
+  The wallet feature allows users to manage their cryptocurrency portfolio, view balances, and track transactions.
 
-Users can buy cryptocurrencies directly from the platform using a seamless and secure transaction process.
-Exchanging Coins
+- **Buying Crypto:**
+  Users can buy cryptocurrencies directly from the platform using a seamless and secure transaction process.
 
-The exchange feature enables users to swap one cryptocurrency for another, facilitating a flexible and efficient trading experience.
-Dynamic Responsive Design
+- **Exchanging Coins:**
+  The exchange feature enables users to swap one cryptocurrency for another, facilitating a flexible and efficient trading experience.
 
-Crypto Swap is designed to be responsive, ensuring a consistent and user-friendly experience across various devices and screen sizes.
-Styled Components and Tailwind CSS
+- **Dynamic Responsive Design:**
+  Crypto Swap is designed to be responsive, ensuring a consistent and user-friendly experience across various devices and screen sizes.
 
-The application leverages styled components for modular styling and Tailwind CSS for utility-first styling, resulting in a visually appealing and maintainable codebase.
-Redux State Management
+- **Styled Components and Tailwind CSS:**
+  The application leverages styled components for modular styling and Tailwind CSS for utility-first styling, resulting in a visually appealing and maintainable codebase.
 
-Redux is employed for efficient state management, ensuring proper data flow and a centralized store for seamless updates across components.
-File Structure
+- **Redux State Management:**
+  Redux is employed for efficient state management, ensuring proper data flow and a centralized store for seamless updates across components.
 
+- **File Structure:**
+  The project follows a well-organized file structure for easy navigation and maintenance.
+
+---
 
 ## Server Code
 
-The server-side code for Crypto Swap is hosted at https://github.com/prabalbhandari04/BITMOSYS-Q423-server. Please refer to the server documentation for details on setting up and running the server.
+The server-side code for Crypto Swap is hosted at [https://github.com/prabalbhandari04/BITMOSYS-Q423-server](https://github.com/prabalbhandari04/BITMOSYS-Q423-server). Please refer to the server documentation for details on setting up and running the server.
+
+---
 
 ## Contributing
 
 Contributions to Crypto Swap are welcome! If you find any issues or have suggestions for improvements, please open an issue or create a pull request.
+
+---
 
 ## License
 
