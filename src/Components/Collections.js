@@ -342,7 +342,7 @@ const Collections = () => {
   
       toast.success(response.data.message);
         setIsModalOpen(false)
-
+        fetchDataAndWallet();
     } catch (error) {
       toast.error(error.message);
       alert('Error swapping:', error);
