@@ -30,17 +30,28 @@ const CollectionsContainer = styled.div`
 
 const GlassCard = styled.div`
   position: relative;
-  width: 20%;
-  margin: 1%;
+  width: 20%; /* Default width */
+  margin: 2%;
   padding: 2%;
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.2);
   transition: all 0.3s ease-in-out;
 
+  @media (max-width: 800px) {
+    /* Tablets: Three cards in a row */
+    width: 30%; /* Adjust as needed */
+  }
+
+  @media (max-width: 767px) {
+    /* Phones: 100% width */
+    width: 100%;
+  }
+
   &:hover {
     transform: scale(1.05);
   }
 `;
+
 
 const FullScreenLoader = styled.div`
   position: fixed;
@@ -135,6 +146,8 @@ const CoinSelectionContainer = styled.div`
 
 const CryptoDetails = styled.div`
   flex-grow: 1;
+  height: 100%;
+  width: 100%;
 `;
 
 const ModalContent = styled.div`
@@ -344,9 +357,8 @@ const Collections = () => {
         setIsModalOpen(false)
         fetchDataAndWallet();
     } catch (error) {
-      toast.error(error.message);
-      alert('Error swapping:', error);
-      setIsModalOpen(false)
+        toast.error(error.message);
+        setIsModalOpen(false)
     }
   };
   
@@ -448,14 +460,15 @@ const Collections = () => {
             <CoinSelectionLabel>Select a coin:</CoinSelectionLabel>
             <CoinInputContainer>
             <CoinSelectionInput onChange={handleSelectionChange} value={selectedCrypto}>
-              {walletDetails.coins
-                .filter((coin) => coin.quantity > 0 && coin !== selectedCoin)
-                .map((coin) => (
-                  <option key={coin._id} value={coin.crypto}>
-                    {coin.cryptoName} - {coin.cryptoSymbol} - {coin.quantity} coins
-                  </option>
-                ))}
-            </CoinSelectionInput>
+  {walletDetails.coins
+    .filter((coin) => coin.quantity > 0 && coin.crypto !== selectedCrypto)
+    .map((coin) => (
+      <option key={coin._id} value={coin.crypto}>
+        {coin.cryptoName} - {coin.cryptoSymbol} - {coin.quantity} coins
+      </option>
+    ))}
+</CoinSelectionInput>
+
               <CoinQuantityInput
                 type="number"
                 placeholder="Enter quantity"

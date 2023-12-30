@@ -194,13 +194,15 @@ const GoldenButtonComponent = () => {
       {isModalOpen && (
         <ModalOverlay>
           <ModalContent ref={modalRef}>
-            <CloseButton onClick={handleCloseModal}>&times;</CloseButton>
-            {cryptoData.walletDetails && (
-              <Header>Coins: {cryptoData.totalCoins}</Header>
-            )}
-            {cryptoData.walletDetails && (
-              <Header>Total Coins: {cryptoData.walletDetails.totalCoinsInWallet}</Header>
-            )}
+            <CloseButton onClick={handleCloseModal}>X</CloseButton>
+            <div>
+              {cryptoData.walletDetails && (
+                <Header>
+                  <p>Coins: {cryptoData.totalCoins}</p>
+                  <p>Total Coins: {cryptoData.walletDetails.totalCoinsInWallet}</p>
+                </Header>
+              )}
+            </div>
             <CoinDetailsContainer>
             {cryptoData.walletDetails &&
               cryptoData.walletDetails.coins.map((crypto) => (
